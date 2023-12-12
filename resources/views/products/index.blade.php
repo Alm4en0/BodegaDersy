@@ -1,5 +1,5 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-    <x-navbars.sidebar activePage="Products"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="products"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Productos"></x-navbars.navs.auth>
@@ -19,30 +19,31 @@
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
+                                <table class="table align-items-center mb-0 text-center">
                                     <thead>
                                         <tr>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 ID</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 IMAGEN</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 NOMBRE</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 DESCRIPCIÓN</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 CATEGORÍA</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 PRECIO COMPRA</th>   
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 PRECIO VENTA</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,7 +55,7 @@
                                             </td>
                                             <td>{{$product->name}}</td>
                                             <td>{{$product->description}}</td>
-                                            <td>{{$product->category_id}}</td>
+                                            <td>{{$product->category->name}}</td>
                                             <td>{{$product->p_price}}</td>
                                             <td>{{$product->s_price}}</td>
                                             <td class="align-middle">

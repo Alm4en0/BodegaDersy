@@ -13,8 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $activePage = 'products';
         $products = Product::all();
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'activePage'));
     }
 
     /**
@@ -32,7 +33,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => ['required','max:2020', 'image'],
+            'image' => ['required', 'max:2020', 'image'],
             'name' => ['required'],
             'description' => ['required'],
             'category_id' => ['required'],
@@ -41,10 +42,10 @@ class ProductController extends Controller
         ]);
     
         $fileName = time() . '_' . $request->image->getClientOriginalName();
-        $filePath = $request->image->move(public_path('assets/img'), $fileName);
+        $filePath = $request->image->move(public_path('assets/img/products/'), $fileName);
     
         $product = new Product();
-        $product->image = 'assets/img/' . $fileName; 
+        $product->image = 'assets/img/products/' . $fileName; 
         $product->name = $request->name;
         $product->description = $request->description;
         $product->category_id = $request->category_id;
@@ -69,7 +70,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('edit', compact('product','categories'));
+        return view('products.edit', compact('product','categories'));
     }
 
     /**
@@ -78,7 +79,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'image' => ['required', 'max:2020', 'image'],
+            'image' => ['sometimes', 'max:2020', 'image'],
             'name' => ['required'],
             'description' => ['required'],
             'category_id' => ['required'],
@@ -86,8 +87,27 @@ class ProductController extends Controller
             's_price' => ['required','numeric']
 
         ]);
-        $product->update($request->all());
+        if ($request->hasFile('image')) {
+            $fileName = time() . '_' . $request->image->getClientOriginalName();
+    
+            // Mover la imagen a la ubicación deseada
+            $filePath = $request->image->move(public_path('assets/img/products'), $fileName);
+    
+            // Asignar la nueva ruta de la imagen al producto
+            $product->image = 'assets/img/products/' . $fileName;
+        }
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->category_id = $request->category_id;
+        $product->p_price = $request->p_price;
+        $product->s_price = $request->s_price;
+
+    // Guardar los cambios en el producto
+        $product->save();
+
         return redirect()->route('products.index');
+
+        
     }
 
     /**

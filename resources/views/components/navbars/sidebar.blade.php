@@ -14,9 +14,20 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-warning' : '' }} "
+                    href="{{ route('dashboard') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Dashboard</span>
+                </a>
+            </li>
+
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Menú</h6>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-warning' : '' }} "
                     href="{{ route('user-profile') }}">
@@ -30,28 +41,27 @@
                 <a class="nav-link text-white {{ $activePage == 'user-management' ? ' active bg-gradient-warning' : '' }} "
                     href="{{ route('user-management') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center"></i>
+                        <i style="font-size: 1.2rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center"></i>
                     </div>
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pages</h6>
-            </li>
+
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-warning' : '' }} "
-                    href="{{ route('dashboard') }}">
+                <a class="nav-link text-white {{ $activePage == 'products' ? ' active bg-gradient-warning' : '' }} "
+                    href="{{ route('products.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">dashboard</i>
+                        <i style="font-size: 1.2rem;" class="material-icons opacity-10 ps-2 pe-2">table_view</i>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
+                    <span class="nav-link-text ms-1">Productos</span>
                 </a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'tables' ? ' active bg-gradient-warning' : '' }} "
                     href="{{ route('tables') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
+                        <i style="font-size: 1.2rem;" class="material-icons opacity-10 ps-2 pe-2">table_view</i>
                     </div>
                     <span class="nav-link-text ms-1">Tables</span>
                 </a>
@@ -60,7 +70,7 @@
                 <a class="nav-link text-white {{ $activePage == 'billing' ? ' active bg-gradient-warning' : '' }}  "
                     href="{{ route('billing') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
+                        <i style="font-size: 1.2rem;" class="material-icons opacity-10 ps-2 pe-2">receipt_long</i>
                     </div>
                     <span class="nav-link-text ms-1">Billing</span>
                 </a>
@@ -69,7 +79,7 @@
                 <a class="nav-link text-white {{ $activePage == 'notifications' ? ' active bg-gradient-warning' : '' }}  "
                     href="{{ route('notifications') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">notifications</i>
+                        <i style="font-size: 1.2rem;" class="material-icons opacity-10 ps-2 pe-2">notifications</i>
                     </div>
                     <span class="nav-link-text ms-1">Notifications</span>
                 </a>

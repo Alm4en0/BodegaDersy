@@ -16,4 +16,11 @@ class Product extends Model
         'p_price',
         's_price'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id');
+    }
 }

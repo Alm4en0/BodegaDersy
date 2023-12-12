@@ -1,0 +1,4 @@
+/* Cambiar el color del borde cuando el campo está enfocado debido al autofocus */
+input:focus:required {
+    border-color: #ffc107; 
+}

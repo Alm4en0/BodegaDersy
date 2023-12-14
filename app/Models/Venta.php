@@ -12,4 +12,8 @@ class Venta extends Model
         'montoTotal',
         'metodoPago'
     ];
+
+    public function detalleventas(){
+        return $this->hasMany(DetalleVenta::class);
+    }
 }

@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $searchTerm = $request->input('search');
         $activePage = 'products';
-        $products = Product::simplePaginate(5);
+        $products = Product::where('name', 'like', '%'.$searchTerm.'%')->simplePaginate(5);
         return view('products.index', compact('products', 'activePage'));
     }
 
@@ -118,4 +121,12 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index')->withStatus('Se eliminó un producto con éxito');
     }
+
+    public function getProductsByCategory($categoryId)
+    {
+        $products = Product::where('category_id', $categoryId)->get();
+
+        return response()->json($products);
+    }
+
 }

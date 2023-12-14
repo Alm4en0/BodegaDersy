@@ -1,9 +1,9 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
 
-    <x-navbars.sidebar activePage="products"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="categories"></x-navbars.sidebar>
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 mt-3">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage='Agregar Producto'></x-navbars.navs.auth>
+        <x-navbars.navs.auth titlePage='Agregar Categoria'></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid px-2 px-md-4">
             <div class="card card-body mx-3 mx-md-4 mt-n0">

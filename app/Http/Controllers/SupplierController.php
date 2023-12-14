@@ -10,10 +10,12 @@ class SupplierController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $suppliers = Supplier::simplePaginate(5);
-        return view('suppliers.index', compact('suppliers'));
+        $searchTerm = $request->input('search');
+        $activePage = 'products';
+        $suppliers = Supplier::where('name', 'like', '%'.$searchTerm.'%')->simplePaginate(5);
+        return view('suppliers.index', compact('suppliers', 'activePage'));
     }
 
     /**

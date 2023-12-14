@@ -10,10 +10,12 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::simplePaginate(5); 
-        return view('categories.index', compact('categories'));
+        $searchTerm = $request->input('search');
+        $activePage = 'categories';
+        $categories = Category::where('name', 'like', '%'.$searchTerm.'%')->simplePaginate(5);
+        return view('categories.index', compact('categories','activePage'));
     }
 
     /**

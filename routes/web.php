@@ -51,7 +51,6 @@ Route::get('/reset-password/{token}', function ($token) {
 })->middleware('guest')->name('password.reset');
 
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
-Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('billing', function () {
@@ -68,6 +67,10 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('user-profile');
 });
 
+
+Route::get('/get-products-by-category/{category}', [ProductController::class, 'getProductsByCategory'])
+    ->name('products.by.category');
+
 //Rutas para nuestros controladores
 Route::resource('products', ProductController::class);
 Route::resource('categories', CategoryController::class);
@@ -78,3 +81,5 @@ Route::resource('ventas', VentaController::class);
 Route::resource('detalleventas', DetalleVentaController::class);
 Route::resource('deudaclientes', DeudaController::class);
 Route::resource('detalledeudas', DetalleDeudaController::class);
+
+

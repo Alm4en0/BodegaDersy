@@ -6,22 +6,23 @@
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             @if (session('status'))
-            <div class="row" >
-                <div class="alert alert-success alert-dismissible text-white" style="max-width: 35rem;" role="alert">
-                    <span class="text-sm">{{ Session::get('status') }}</span>
-                    <button type="button" class="btn-close text-lg py-3 opacity-10"
-                        data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="row">
+                    <div class="alert alert-success alert-dismissible text-white" style="max-width: 35rem;" role="alert">
+                        <span class="text-sm">{{ Session::get('status') }}</span>
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
             @endif
             <div class="d-flex justify-content-between mb-3 my-3">
-                <form action="{{route('categories.index')}}" method="GET">
+                <form action="{{ route('inventories.index') }}" method="GET">
                     <div class="card">
-                        <div class="input-group input-group-outline ">
-                            <label class="form-label">Type here...</label>
-                            <input type="text" class="form-control">
+                        <div class="input-group input-group-outline" style="width: 20rem">
+                            <label class="form-label">Ingrese el nombre del Producto</label>
+                            <input type="text" class="form-control" name="search" placeholder="">
+                            <button type="submit" class="btn btn-warning mt-0 mb-0">Buscar</button>
                         </div>
                     </div>
                 </form>
@@ -45,51 +46,63 @@
                                 <table class="table align-items-center mb-0 text-center">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 ID</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 PRODUCTO</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 STOCK</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 PROVEEDOR</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
-                                                    ACTUALIZACIÓN</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
+                                                ACTUALIZACIÓN</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($inventories as $inventory)
-                                        <tr>
-                                            <td>{{ $inventory->id }}</td>
-                                            <td>{{ $inventory->product->name }}</td>
-                                            <td>{{ $inventory->stock }}</td>
-                                            <td>
-                                                @if ($inventory->supplier)
-                                                    {{ $inventory->supplier->name }}
-                                                @else
-                                                    Sin proveedor
-                                                @endif
-                                            </td>
-                                            <td>{{date('d-m-Y',strtotime( $inventory->created_at))}}</td>
-                                            <td class="align-middle">
-                                                <form action="{{ route('inventories.destroy', $inventory->id) }}" method="POST">
-                                                    <a rel="tooltip" class="btn btn-success btn-link"
-                                                        href="{{ route('inventories.edit', $inventory->id) }}" data-original-title=""
-                                                        title="">
-                                                        <i class="material-icons">edit</i>
-                                                        <div class="ripple-container"></div>
-                                                    </a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-link"
-                                                        data-original-title="" title="">
-                                                        <i class="material-icons">close</i>
-                                                        <div class="ripple-container"></div>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $inventory->id }}</td>
+                                                <td>
+                                                    @if ($inventory->product)
+                                                        {{ $inventory->product->name }}
+                                                    @else
+                                                        Sin producto
+                                                    @endif
+                                                </td>
+                                                <td>{{ $inventory->stock }}</td>
+                                                <td>
+                                                    @if ($inventory->supplier)
+                                                        {{ $inventory->supplier->name }}
+                                                    @else
+                                                        Sin proveedor
+                                                    @endif
+                                                </td>
+                                                <td>{{ date('d-m-Y', strtotime($inventory->created_at)) }}</td>
+                                                <td class="align-middle">
+                                                    <form action="{{ route('inventories.destroy', $inventory->id) }}"
+                                                        method="POST">
+                                                        <a rel="tooltip" class="btn btn-success btn-link"
+                                                            href="{{ route('inventories.edit', $inventory->id) }}"
+                                                            data-original-title="" title="">
+                                                            <i class="material-icons">edit</i>
+                                                            <div class="ripple-container"></div>
+                                                        </a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-link"
+                                                            data-original-title="" title="">
+                                                            <i class="material-icons">close</i>
+                                                            <div class="ripple-container"></div>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -97,7 +110,7 @@
                         </div>
                     </div>
                     <!-- Pagination for inventories if needed -->
-                    <!-- Example: {{$inventories->links()}} -->
+                    <!-- Example: {{ $inventories->links() }} -->
                 </div>
             </div>
             <x-footers.auth></x-footers.auth>

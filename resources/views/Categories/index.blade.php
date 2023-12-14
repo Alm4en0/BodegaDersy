@@ -23,11 +23,13 @@
                         <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Agregar nueva Categoria
                     </a>
                 </div>
-                <form action="{{route('categories.index')}}" method="GET">
+                <form action="{{ route('categories.index') }}" method="GET">
                     <div class="card">
-                        <div class="input-group input-group-outline ">
-                            <label class="form-label">Type here...</label>
-                            <input type="text" class="form-control">
+                        <div class="input-group input-group-outline" style="width: 20rem">
+                            <label class="form-label">Ingrese el nombre de categoría</label>
+                            <input type="text" class="form-control" name="search"
+                                placeholder="">
+                            <button type="submit" class="btn btn-warning mt-0 mb-0">Buscar</button>
                         </div>
                     </div>
                 </form>

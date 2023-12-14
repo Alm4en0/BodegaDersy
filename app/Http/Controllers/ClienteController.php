@@ -10,9 +10,12 @@ class ClienteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::simplePaginate(5);
+        $searchTerm = $request->input('search');
+
+        $activePage = 'clientes';
+        $clientes = Cliente::where('name', 'like', '%'.$searchTerm.'%')->simplePaginate(5);
         return view('clientes.index', compact('clientes'));
     }
 

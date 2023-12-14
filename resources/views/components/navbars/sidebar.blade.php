@@ -29,8 +29,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'ventas' ? ' active bg-gradient-warning' : '' }} "
-                    href="{{ route('ventas.index') }}">
+                <a class="nav-link text-white {{ $activePage == 'vender' ? ' active bg-gradient-warning' : '' }} "
+                    href="{{ route('ventas.create') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1.2rem;" class="material-icons opacity-10 ps-2 pe-2">add_shopping_cart</i>
                     </div>
@@ -104,16 +104,6 @@
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'profile' ? ' active bg-gradient-warning' : '' }}  "
-                    href="{{ route('profile') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Perfil</span>
-                </a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-warning' : '' }} "
                     href="{{ route('user-profile') }}">

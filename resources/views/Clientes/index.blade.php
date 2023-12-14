@@ -1,12 +1,13 @@
-<x-layout bodyClass="g-sidenav-show  bg-gray-200">
-    <x-navbars.sidebar activePage="products"></x-navbars.sidebar>
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+<x-layout bodyClass="g-sidenav-show bg-gray-200">
+    <x-navbars.sidebar activePage="clientes"></x-navbars.sidebar>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="Productos"></x-navbars.navs.auth>
+        <x-navbars.navs.auth titlePage="Clientes"></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
+            <!-- Mensajes de sesión -->
             @if (session('status'))
-            <div class="row" >
+            <div class="row">
                 <div class="alert alert-success alert-dismissible text-white" style="max-width: 35rem;" role="alert">
                     <span class="text-sm">{{ Session::get('status') }}</span>
                     <button type="button" class="btn-close text-lg py-3 opacity-10"
@@ -18,23 +19,27 @@
             @endif
     
             <div class="d-flex justify-content-between mb-3 my-3">
+                <form action="{{route('suppliers.index')}}" method="GET">
+                    <div class="card">
+                        <div class="input-group input-group-outline ">
+                            <label class="form-label">Type here...</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </form>
                 <div>
-                    <a class="btn btn-icon btn-3 btn-secondary" href="{{ route('categories.index') }}">
-                    <span class="btn-inner--icon me-1"><i class="material-icons">category</i>&nbsp;&nbsp;Categorias</span>
+                    <a class="btn bg-gradient-dark mb-0" href="{{ route('clientes.create') }}">
+                        <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Agregar nuevo Cliente
                     </a>
                 </div>
-                <div>
-                    <a class="btn bg-gradient-dark mb-0" href="{{ route('products.create') }}">
-                        <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Agregar nuevo Producto
-                    </a>
-                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
+                        <!-- Encabezado de la tabla -->
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-warning shadow-primary border-radius-lg pt-4 pb-3">
-                                <h5 class="text-white text-capitalize ps-3">Tabla de Productos</h5>
+                                <h5 class="text-white text-capitalize ps-3">Tabla de Clientes</h5>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -46,45 +51,38 @@
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 ID</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
-                                                IMAGEN</th>
-                                            <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
                                                 NOMBRE</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
-                                                DESCRIPCIÓN</th>
+                                                APELLIDO</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
-                                                CATEGORÍA</th>
+                                                DNI</th>   
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
-                                                PRECIO COMPRA</th>   
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-30">
-                                                PRECIO VENTA</th>
+                                                TELÉFONO</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($products as $product)
+                                        <!-- Iteración de clientes -->
+                                        @foreach ($clientes as $cliente)
                                         <tr>
-                                            <td>{{$product->id}}</td>
-                                            <td>
-                                                <img src="{{asset($product->image)}}" alt="" width="80">
-                                            </td>
-                                            <td>{{$product->name}}</td>
-                                            <td>{{$product->description}}</td>
-                                            <td>{{$product->category->name}}</td>
-                                            <td>{{$product->p_price}}</td>
-                                            <td>{{$product->s_price}}</td>
+                                            <!-- Datos del cliente -->
+                                            <td>{{$cliente->id}}</td>
+                                            <td>{{$cliente->name}}</td>
+                                            <td>{{$cliente->apellido}}</td>
+                                            <td>{{$cliente->dni}}</td>
+                                            <td>{{$cliente->phoneNumber}}</td>
                                             <td class="align-middle">
-                                                <form action="{{route('products.destroy', $product->id)}}" method="POST">
+                                                <form action="{{route('clientes.destroy', $cliente->id)}}" method="POST">
+                                                    <!-- Botones de acción -->
                                                     <a rel="tooltip" class="btn btn-success btn-link"
-                                                    href="{{route('products.edit', $product->id)}}" data-original-title=""
-                                                    title="">
-                                                    <i class="material-icons">edit</i>
-                                                    <div class="ripple-container"></div>
+                                                        href="{{route('clientes.edit', $cliente->id)}}" data-original-title=""
+                                                        title="">
+                                                        <i class="material-icons">edit</i>
+                                                        <div class="ripple-container"></div>
                                                     </a>
                                                     @csrf
                                                     @method('DELETE')
@@ -96,15 +94,20 @@
                                                 </form>
                                             </td>
                                         </tr>
+                                        <!-- Modal para detalles del cliente -->
+                                        <div class="modal fade" id="exampleModalMessage{{$cliente->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <!-- Contenido del modal -->
+                                        </div>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <!-- Paginación -->
                     <div class="my-2">
                         <div class="pagination-links">
-                            {{$products->links()}}
+                            {{$clientes->links()}}
                         </div>
                     </div>
                 </div>
@@ -113,5 +116,15 @@
         </div>
     </main>
     <x-plugins></x-plugins>
-
 </x-layout>
+
+<script>
+    // JavaScript para actualizar el modal con la información del cliente al hacer clic en el botón
+    const messageModalButtons = document.querySelectorAll('.message-modal-button');
+
+    messageModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Actualización de datos en el modal
+        });
+    });
+</script>

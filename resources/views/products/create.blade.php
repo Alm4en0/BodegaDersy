@@ -59,7 +59,7 @@
                                         </div>
                                         <div class="mb-3 col-md-12">
                                             <label class="form-label">Categoria</label>
-                                            <select id="" class="form-control border border-2" name="category_id">
+                                            <select id="" class="form-control border border-2 p-2" name="category_id">
                                                 <option value=""> Select</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -99,6 +99,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn bg-gradient-dark btn-hover-dark mt-3">Guardar</button>
+                            <a href="{{route('products.index')}}" class="btn btn-danger mt-3">Cancelar</a>
                         </form>
 
                     </div>

@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $activePage = 'products';
-        $products = Product::all();
+        $products = Product::simplePaginate(5);
         return view('products.index', compact('products', 'activePage'));
     }
 
@@ -53,7 +53,7 @@ class ProductController extends Controller
         $product->s_price = $request->s_price;
         $product->save();
     
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->withStatus('Se agregó un nuevo producto');
     }
 
     /**
@@ -105,7 +105,7 @@ class ProductController extends Controller
     // Guardar los cambios en el producto
         $product->save();
 
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->withStatus('Se actualizó el producto');
 
         
     }
@@ -116,6 +116,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->withStatus('Se eliminó un producto con éxito');
     }
 }

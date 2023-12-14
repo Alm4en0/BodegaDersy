@@ -54,8 +54,7 @@
                                             </div>
                                             <div class="text-center">
                                                 <button type="submit"
-                                                    class="btn btn-lg bg-gradient-warning btn-lg w-100 mt-4 mb-0">Sign
-                                                    Up</button>
+                                                    class="btn btn-lg bg-gradient-warning btn-lg w-100 mt-4 mb-0">Registrarme</button>
                                             </div>
                                         </form>
                                     </div>
@@ -63,7 +62,7 @@
                                         <p class="mb-2 text-sm mx-auto">
                                             ¿Ya tienes una cuenta?
                                             <a href="{{ route('login') }}"
-                                                class="text-warning text-gradient font-weight-bold">Sign in</a>
+                                                class="text-warning text-gradient font-weight-bold">Iniciar Sesión</a>
                                         </p>
                                     </div>
                                 </div>
